@@ -7,7 +7,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class T1_MyThreadPoolLearn {
+public class T1_ThreadPoolLearn {
     /**
      * 示例1：测试向threadPool添加task时，线程池的变化
      * 1. 线程数<coreSize，则直接新建线程运行。这里不考虑线程是否空闲
