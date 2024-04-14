@@ -1,4 +1,4 @@
-package com.froggengo.thread;
+package com.froggengo.thread.thread;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;

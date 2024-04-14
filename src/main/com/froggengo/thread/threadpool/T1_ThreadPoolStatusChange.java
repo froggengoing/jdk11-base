@@ -1,4 +1,4 @@
-package com.froggengo.thread;
+package com.froggengo.thread.threadpool;
 
 
 import org.junit.jupiter.api.Test;
@@ -20,7 +20,12 @@ public class T1_ThreadPoolStatusChange {
      * shutdownNow()则直接终止任务，但是是通过Thread.interrupt()方法实现的，如果任务里面没有sleep 、wait、Condition等是无法终止任务的
      * 如newTask()中是计算，则任务能正常执行万，而newTaskWithSleep则抛异常java.lang.InterruptedException
      * @see java.util.concurrent.ThreadPoolExecutor#interruptWorkers()
-     *
+     * shutdownNow -> 状态STOP
+     * shutdown    -> 状态SHUTDOWN
+     * 两个状态的区别体现在
+     * 1. 线程执行任务时发现是stop，直接终止Thread.interrupted()
+     * @see java.util.concurrent.ThreadPoolExecutor#runWorker(java.util.concurrent.ThreadPoolExecutor.Worker)
+     * 2.
      */
     @Test
     public void test17() throws InterruptedException {

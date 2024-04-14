@@ -1,4 +1,4 @@
-package com.froggengo.thread;
+package com.froggengo.thread.threadpool;
 
 import org.junit.jupiter.api.Test;
 
