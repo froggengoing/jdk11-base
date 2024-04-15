@@ -3,7 +3,7 @@ package com.froggengo.thread.thread;
 
 import java.util.concurrent.TimeUnit;
 
-public class Thread8_syncronized2 {
+public class T8_ThreadSyncronized2 {
     /**
      * class monitor.
      * 对class进行加锁，期望1/2/3只有一个能获得锁
