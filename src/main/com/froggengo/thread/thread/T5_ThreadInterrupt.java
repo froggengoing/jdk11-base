@@ -13,10 +13,11 @@ public class T5_ThreadInterrupt {
     /**
      * interrupt()方法打断 blocked/waiting/timed_waiting 的线程状态
      * sleep/wait/join方法会捕捉InterruptedException异常。
+     *
      * @throws InterruptedException
      */
     @Test
-    public void testInterrupt () throws InterruptedException {
+    public void testInterrupt() throws InterruptedException {
         Thread thread = new Thread(() -> {
             try {
                 TimeUnit.MINUTES.sleep(1);
@@ -30,7 +31,7 @@ public class T5_ThreadInterrupt {
         thread.interrupt();
         Thread.sleep(100);
 //        注意这里线程状态isInterrupted，线程保存的interrupt flag已被清除
-        System.out.println("结束，线程状态isInterrupted："+thread.isInterrupted());
+        System.out.println("结束，线程状态isInterrupted：" + thread.isInterrupted());
         System.out.println("结束");
     }
 
@@ -38,21 +39,23 @@ public class T5_ThreadInterrupt {
      * 对线程执行interrupt操作，会使线程保存一个interrupt flag
      * 但是如果如果线程正在执行可中断方法，即抛出InterruptedException异常，则标志会被清除
      * 本例子则中断标志会保留
+     *
      * @throws InterruptedException
      */
     @Test
-    public  void test() throws InterruptedException {
+    public void test() throws InterruptedException {
         Thread thread = new Thread(() -> {
-            while (true){
+            while (true) {
 
             }
         });
         thread.start();
         Thread.sleep(100);
-        System.out.println("准备打断线程休眠，线程状态isInterrupted： "+thread.isInterrupted());
+        System.out.println("准备打断线程休眠，线程状态isInterrupted： " + thread.isInterrupted());
         thread.interrupt();
         Thread.sleep(100);
-        System.out.println("结束，线程状态isInterrupted："+thread.isInterrupted());
+//        这里会之际标记为true
+        System.out.println("结束，线程状态isInterrupted：" + thread.isInterrupted());
     }
 
     /**
@@ -66,21 +69,22 @@ public class T5_ThreadInterrupt {
      * 当前线程中断状态，并清算中断标识 true
      * 当前线程中断状态，并清算中断标识 false
      * 当前线程中断状态，并清算中断标识 false
+     *
      * @throws InterruptedException
      */
     @Test
-    public  void testInterruptBoolean() throws InterruptedException {
+    public void testInterruptBoolean() throws InterruptedException {
         Thread thread = new Thread(() -> {
-            while (true){
-                System.out.println("当前线程中断状态，并清算中断标识 "+Thread.currentThread().interrupted());
+            while (true) {
+                System.out.println("当前线程中断状态，并清算中断标识 " + Thread.currentThread().interrupted());
             }
         });
         thread.setDaemon(true);
         thread.start();
         Thread.sleep(100);
-        System.out.println("准备打断线程休眠，线程状态isInterrupted： "+thread.isInterrupted());
+        System.out.println("准备打断线程休眠，线程状态isInterrupted： " + thread.isInterrupted());
         thread.interrupt();
         Thread.sleep(100);
-        System.out.println("结束，线程状态isInterrupted："+thread.isInterrupted());
+        System.out.println("结束，线程状态isInterrupted：" + thread.isInterrupted());
     }
 }
