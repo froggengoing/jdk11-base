@@ -10,6 +10,11 @@ import java.util.Collections;
 public class T2_Comparator {
 
 
+    /**
+     * https://javaguide.cn/java/collection/java-collection-questions-01.html#comparable-%E5%92%8C-comparator-%E7%9A%84%E5%8C%BA%E5%88%AB
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         ArrayList<Person> persons = new ArrayList<>();
         persons.add(new Person(1, "1"));
