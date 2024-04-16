@@ -39,8 +39,6 @@ public class T1_PrintSerialByThread {
                             }
                             count++;
                             System.out.println("thread：" + index + ",print:" + count);
-
-
                         }
 
                     }
