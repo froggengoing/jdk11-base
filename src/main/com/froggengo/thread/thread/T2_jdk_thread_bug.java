@@ -66,7 +66,7 @@ public class T2_jdk_thread_bug {
                 .limit(Runtime.getRuntime().availableProcessors() - 1)
                 .forEach(CompletableFuture::runAsync);
 
-        Thread.sleep(1000);
+        Thread.sleep(1000_000);
         System.exit(0);
     }
 }
