@@ -16,7 +16,7 @@ public class T1_PrintSerialByThread {
 
         for (int i = 0; i < 3; i++) {
             int finalI = i;
-            new Thread() {
+            new Thread(String.valueOf(i)) {
                 int index = finalI;
 
                 @Override
