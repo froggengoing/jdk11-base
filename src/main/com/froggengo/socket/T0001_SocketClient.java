@@ -20,33 +20,22 @@ public class T0001_SocketClient {
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
                 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))
         ) {
-            //String line;
-            //while ((line = in.readLine()) != null) {
-            //    System.out.println(line);
-            //    //out.println("me too!");
-            //}
-            // 读取服务器发送的消息
-            String line;
-            while ((line = in.readLine()) != null) {
-                System.out.println("Server response: " + line);
+            new Thread(() -> {
+                while (true) {
+                    try {
+                        String s = in.readLine();
+                        System.out.println("read from server:" + s);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+            int count = 0;
+            while (true) {
+                out.println("hello server:" + count++);
+                System.out.println("writer to server");
+                Thread.sleep(5000);
             }
-
-            //new Thread(() -> {
-            //    while (true) {
-            //        try {
-            //            String s = in.readLine();
-            //            System.out.println("read from server:" + s);
-            //        } catch (IOException e) {
-            //            e.printStackTrace();
-            //        }
-            //    }
-            //}).start();
-            //int count = 0;
-            //while (true) {
-            //    out.println("hello server:" + count++);
-            //    System.out.println("writer to server");
-            //    Thread.sleep(5000);
-            //}
 
 
         } catch (Exception e) {
