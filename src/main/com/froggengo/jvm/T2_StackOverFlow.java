@@ -2,6 +2,8 @@ package com.froggengo.jvm;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -16,6 +18,11 @@ public class T2_StackOverFlow {
      * 2、修改启动参数-Xss2M
      */
     public static void main(String[] args) {
+        ExecutorService executorService = Executors.newFixedThreadPool(1);
+        executorService.execute(() -> {
+            while (true) {
+            }
+        });
         AtomicInteger atomicInteger = new AtomicInteger();
         try {
             add(atomicInteger);

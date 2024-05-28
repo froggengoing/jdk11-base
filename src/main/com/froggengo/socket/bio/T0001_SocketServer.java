@@ -1,4 +1,4 @@
-package com.froggengo.socket;
+package com.froggengo.socket.bio;
 
 import java.io.*;
 import java.net.ServerSocket;
