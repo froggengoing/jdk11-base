@@ -6,6 +6,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * @author fly
@@ -19,17 +20,20 @@ public class T2_StackOverFlow {
      */
     public static void main(String[] args) {
         ExecutorService executorService = Executors.newFixedThreadPool(1);
+        AtomicLong atomicLong = new AtomicLong();
         executorService.execute(() -> {
             while (true) {
+                System.out.println(atomicLong.incrementAndGet());
             }
         });
         AtomicInteger atomicInteger = new AtomicInteger();
-        try {
-            add(atomicInteger);
-        } catch (Error e) {
-            System.out.println(e);
-            System.out.println("栈深度：" + atomicInteger.get());
-        }
+        add(atomicInteger);
+        //try {
+        //    add(atomicInteger);
+        //} catch (Error e) {
+        //    System.out.println(e);
+        //    System.out.println("栈深度：" + atomicInteger.get());
+        //}
         //默认-Xss1M:10415、16663、16480、10411
         //-Xss2M:35640、34350、21346
     }
