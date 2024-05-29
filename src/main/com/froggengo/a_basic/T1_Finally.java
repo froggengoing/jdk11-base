@@ -42,6 +42,7 @@ public class T1_Finally {
 
     public static int cal3() {
         int a = 5;
+        Class<Integer> integerClass = int.class;
         try {
             a += 5;
             return a;

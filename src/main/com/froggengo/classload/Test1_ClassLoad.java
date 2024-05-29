@@ -17,6 +17,7 @@ public class Test1_ClassLoad {
 
         System.out.println(nihao2.getChildname());
 
-    } 
+
+    }
 
 } 
