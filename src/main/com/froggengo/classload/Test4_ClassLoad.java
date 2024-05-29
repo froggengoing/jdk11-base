@@ -59,4 +59,16 @@ public class Test4_ClassLoad {
         // jdk11 有72个
         System.out.println("count:" + count);
     }
+
+    /**
+     * @throws ClassNotFoundException
+     * @see java.sql.DriverManager
+     */
+    @Test
+    public void test63() throws ClassNotFoundException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        System.out.println(java.sql.Driver.class.getClassLoader() == ClassLoader.getPlatformClassLoader());
+        System.out.println(ClassLoader.getSystemClassLoader());
+        System.out.println(com.mysql.cj.jdbc.Driver.class.getClassLoader() == ClassLoader.getSystemClassLoader());
+    }
 }
