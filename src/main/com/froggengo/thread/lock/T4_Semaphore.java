@@ -20,7 +20,8 @@ public class T4_Semaphore {
         ExecutorService executors = Executors.newFixedThreadPool(10);
         AtomicInteger count = new AtomicInteger();
         Collection<Callable<Integer>> list = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 50; i++) {
+            int i1 = count.incrementAndGet();
             Callable<Integer> submit = () -> {
                 System.out.println(Thread.currentThread().getName() + " try");
                 try {
@@ -32,17 +33,19 @@ public class T4_Semaphore {
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-                int i1 = count.incrementAndGet();
-                if (i1 == 10) {
-                    throw new RuntimeException("i1==10");
-                }
+
+                //if (i1 == 10) {
+                //    throw new RuntimeException("i1==10");
+                //}
                 System.out.println(Thread.currentThread().getName() + "---" + i1);
                 return i1;
             };
             list.add(submit);
         }
         try {
+            //  when all complete.
             List<Future<Integer>> futureList = executors.invokeAll(list);
+            System.out.println("all task finished");
             for (int i = 0; i < futureList.size(); i++) {
                 try {
                     System.out.println(futureList.get(i).get());
