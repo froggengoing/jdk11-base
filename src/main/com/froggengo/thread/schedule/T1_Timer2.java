@@ -13,7 +13,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class T1_Timer2 {
 
     /**
-     * schedule 则 上一次时间 + peroid
+     * schedule 则 上一次开始时间 + peroid
      * scheduleAtFixedRate 执行时间固定为 start_time + n * priod
      */
     @Test
@@ -25,7 +25,7 @@ public class T1_Timer2 {
         //(任务耗时：0.5s)第二次： 1000 * 2000*1，但任务耗时3秒，所以执行开始时间为 4000,即第一次执行完马上执行
         //第三次：
         // scheduleAtFixedRate ，则开始时间为 1000 * 2000*2, => 第一次开始时间 + （n-1）* period
-        // schedule，则为 4000 + task cost / period，=> 上一次运行时间 +  period
+        // schedule，则为 4000 + task cost / period，=> 上一次开始时间 +  period
         /** scheduleAtFixedRate          schedule
          *  1008:Timer-0                1016:Timer-0
          *  4037:Timer-0                4039:Timer-0

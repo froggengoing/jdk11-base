@@ -19,12 +19,17 @@ public class T1_Timer {
         long beginMs = System.currentTimeMillis();
 
         // 任务2的开始执行时间 = 任务1 delay time + task1 cost
-        timer.schedule(newTimeTask(beginMs), 1000L);
+        TimerTask t1 = newTimeTask(beginMs);
+        timer.schedule(t1, 1000L);
         //任务1优先执行
-        timer.schedule(newTimeTask(beginMs), 500L);
+        TimerTask t2 = newTimeTask(beginMs);
+        timer.schedule(t2, 500L);
 
         try {
             Thread.sleep(5_000);
+            t1.cancel();
+            Thread.sleep(5_000);
+
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -37,10 +42,16 @@ public class T1_Timer {
         // 1s 延迟后执行任务，每秒执行一次
         // 但是任务执行需要两秒，所以这里每次执行完任务后会马上执行下一次任务
         // task cost > period ，马上执行
-        timer.schedule(newTimeTask(beginMs), 1000L, 1000L);
+        TimerTask t1 = newTimeTask(beginMs);
+        timer.schedule(t1, 1000L, 1000L);
 
         try {
             Thread.sleep(20_000);
+            System.out.println("准备取消任务");
+            t1.cancel();
+            System.out.println("取消任务");
+            Thread.sleep(20_000);
+            System.out.println("finished");
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

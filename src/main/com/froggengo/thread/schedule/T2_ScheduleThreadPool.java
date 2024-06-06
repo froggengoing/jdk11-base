@@ -2,9 +2,7 @@ package com.froggengo.thread.schedule;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -40,7 +38,8 @@ public class T2_ScheduleThreadPool {
          * 5023:pool-1-thread-1   这是按计划执行，没有考虑上一次任务由延迟
          * 5531:pool-1-thread-1finished
          */
-        scheduledThreadPool.scheduleAtFixedRate(newTimeTask(beginMs, count), 1L, 2L, TimeUnit.SECONDS);
+        ScheduledFuture<?> scheduledFuture = scheduledThreadPool.scheduleAtFixedRate(newTimeTask(beginMs, count), 1L, 2L, TimeUnit.SECONDS);
+
         Thread.sleep(20_000);
     }
 
@@ -65,4 +64,35 @@ public class T2_ScheduleThreadPool {
         };
         return task;
     }
+
+    @Test
+    public void test70(){
+        // 创建一个 ScheduledExecutorService
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(2);
+
+        // 创建一个 Callable 任务
+        Callable<String> task = () -> {
+            System.out.println(Thread.currentThread().getName() + " executing task");
+            // 模拟长时间运行任务
+            Thread.sleep(2000);
+            return "Task completed";
+        };
+
+        // 调度任务，延迟1秒后执行
+        ScheduledFuture<String> future = scheduler.schedule(task, 1, TimeUnit.SECONDS);
+
+        // 获取任务的执行结果
+        try {
+            // get 方法会阻塞，直到任务完成并返回结果
+            String result = future.get();
+            System.out.println("Task result: " + result);
+        } catch (InterruptedException | ExecutionException e) {
+            // 捕获任务执行中的异常
+            e.printStackTrace();
+        } finally {
+            // 关闭调度器
+            scheduler.shutdown();
+        }
+    }
 }
+
