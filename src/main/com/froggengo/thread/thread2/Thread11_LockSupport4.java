@@ -21,7 +21,6 @@ public class Thread11_LockSupport4{
         System.out.println("    线程"+thread1.getName()+", 先调用unpark");
         Thread.sleep(4_000);
         System.out.println("    线程"+thread1.getName()+", 线程状态"+thread1.getState());
-
     }
 }
 
