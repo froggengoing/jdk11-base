@@ -78,6 +78,70 @@ public class T1_Collection {
         }
     }
 
+    @Test
+    public void test82_grow() {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        /**
+         *   触发map数组，初始化
+         */
+        map.put(1, 1);
+        map.put(2, 2);
+        map.put(3, 3);
+        map.put(4, 4);
+        map.put(5, 5);
+        map.put(6, 6);
+        map.put(7, 7);
+        map.put(8, 8);
+        map.put(9, 9);
+        map.put(10, 10);
+        map.put(11, 11);
+        map.put(12, 12);
+        /**
+         *
+         * 满足++size > threshold,即13 > 12 ,执行resize()
+         * 1. 扩容：newCap = oldCap << 1 =>  32 = 16 << 1
+         *     newThr = oldThr << 1 =>   24 = 12 << 1
+         * 2. 创建新的数组容器：Node<K,V>[] newTab = (Node<K,V>[])new Node[newCap]
+         * 3. 遍历原数组，将原数组的元素复制到新数组中
+         * 3.1 单个Node
+         * 3.2 链表
+         * 3.3 TreeMap
+         */
+        map.put(13, 1);
+        // 将元素添加到 13 元素的后面，形成链表
+        map.put(32 * 1 + 13, 2);
+        map.put(32 * 2 + 13, 3);
+        map.put(32 * 3 + 13, 4);
+        map.put(32 * 4 + 13, 5);
+        map.put(32 * 5 + 13, 6);
+        map.put(32 * 6 + 13, 7);
+        map.put(32 * 7 + 13, 8);
+        /**
+         * 满足binCount >= TREEIFY_THRESHOLD - 1 ， 执行 treeifyBin
+         * @see HashMap#treeifyBin(HashMap.Node[], int)
+         * 满足：tab == null || (n = tab.length) < MIN_TREEIFY_CAPACITY
+         * 即  tab.length = 32 < 64 , 执行 resize
+         * @see HashMap#resize()
+         * 总结：
+         * 1. 当链长度超过8，第9个元素会执行 treeifyBin
+         * 2. treeifyBin将链表转为红红黑树，要求map数组元素大于64，否则先将数组扩容
+         *
+         */
+        map.put(32 * 8 + 13, 9);
+        /**
+         *
+         */
+        map.put(32 * 2 * 5 + 13, 6);
+        map.put(32 * 2 * 6 + 13, 7);
+        map.put(32 * 2 * 7 + 13, 8);
+        /**
+         * 触发链树转红黑树
+         */
+        map.put(32 * 2 * 8 + 13, 9);
+
+
+    }
+
     /**
      * 二义性
      * map.get("test")都为空，两种情况
