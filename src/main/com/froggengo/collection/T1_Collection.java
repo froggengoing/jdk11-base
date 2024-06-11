@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -23,6 +24,18 @@ public class T1_Collection {
         // 按索引移除
         // 将数组index之后的元素复制到index，最后位置置空
         System.out.println(list.remove(0));
+    }
+
+    /**
+     * HashSet 基于 HashMap，所以add和remove相当于操作HashMap的key
+     */
+    @Test
+    public void test29(){
+        HashSet<Integer> set = new HashSet<>();
+        set.add(1);
+        set.add(1);
+        set.remove(1);
+        System.out.println(set.contains(1));
     }
 
     /**
