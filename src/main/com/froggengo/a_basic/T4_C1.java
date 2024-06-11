@@ -21,13 +21,15 @@ interface T4_P2 {
 
     int add1(Integer value);
 }
+
 interface T4_P3 {
 
     default int add0(Integer value) {
         return 0;
     }
 }
-public interface T4_C1 extends T4_P1, T4_P2 ,T4_P3{
+
+public interface T4_C1 extends T4_P1, T4_P2, T4_P3 {
 
 
     //int add(Integer value);
@@ -43,4 +45,15 @@ public interface T4_C1 extends T4_P1, T4_P2 ,T4_P3{
         return T4_P1.super.add1(value);
     }
 
+}
+
+class T4_CLZ_01 {
+    protected int add(int a, int b) {
+        return a + b;
+    }
+}
+class T4_CLZ_02 extends T4_CLZ_01 {
+    public int add(int a, int b) {
+        return a + b;
+    }
 }
