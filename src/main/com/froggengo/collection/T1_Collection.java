@@ -15,13 +15,19 @@ public class T1_Collection {
     @Test
     public void test11() {
         ArrayList<Integer> list = new ArrayList<>();
+        // 触发扩容
         list.add(1);
+        // 移除对象
         System.out.println(list.remove((Integer) 1));
+        list.add(2);
+        // 按索引移除
+        // 将数组index之后的元素复制到index，最后位置置空
+        System.out.println(list.remove(0));
     }
 
     /**
      * 二义性
-     *  map.get("test")都为空，两种情况
+     * map.get("test")都为空，两种情况
      * 1. 一种是value为null
      * 2. 一种是没有test这个key
      * 二义性通过containsKey判断
@@ -39,7 +45,7 @@ public class T1_Collection {
         System.out.println("map.containsKey(\"test\"):" + map.containsKey("test"));
 
         ConcurrentHashMap<String, String> conMap = new ConcurrentHashMap<>();
-        conMap.put("test",null);
+        conMap.put("test", null);
     }
 
     /**
