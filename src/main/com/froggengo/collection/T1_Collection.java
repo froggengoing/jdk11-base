@@ -2,10 +2,7 @@ package com.froggengo.collection;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -30,12 +27,55 @@ public class T1_Collection {
      * HashSet 基于 HashMap，所以add和remove相当于操作HashMap的key
      */
     @Test
-    public void test29(){
+    public void test29() {
         HashSet<Integer> set = new HashSet<>();
         set.add(1);
         set.add(1);
         set.remove(1);
         System.out.println(set.contains(1));
+    }
+
+
+    @Test
+    public void test43() {
+        HashSet<String> set = new HashSet<>();
+        set.add("abc");
+        set.add("bcd");
+        set.add("ccc");
+        // HashSet打印顺序并不等于输入顺序
+        for (String s : set) {
+            System.out.println(s);
+        }
+        System.out.println("==========");
+        LinkedHashSet<String> linkedHashSet = new LinkedHashSet<>();
+        linkedHashSet.add("abc");
+        linkedHashSet.add("bcd");
+        linkedHashSet.add("ccc");
+        // HashSet打印顺序并不等于输入顺序
+        for (String s : linkedHashSet) {
+            System.out.println(s);
+        }
+    }
+
+    @Test
+    public void test60() {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("abc", "abc");
+        map.put("bcd", "bcd");
+        map.put("ccc", "ccc");
+        // HashSet打印顺序并不等于输入顺序
+        for (Map.Entry<String, String> s : map.entrySet()) {
+            System.out.println(s.getKey());
+        }
+        System.out.println("==========");
+        LinkedHashMap<String, String> linkedHashMap = new LinkedHashMap<>();
+        linkedHashMap.put("abc", "abc");
+        linkedHashMap.put("bcd", "bcd");
+        linkedHashMap.put("ccc", "ccc");
+        // HashSet打印顺序并不等于输入顺序
+        for (Map.Entry<String, String> s : linkedHashMap.entrySet()) {
+            System.out.println(s.getKey());
+        }
     }
 
     /**
